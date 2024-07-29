@@ -1,39 +1,43 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.Crowy;
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-    [RequireComponent(typeof(HealthComponent))]
+    [RequireComponent(typeof(HealthComponent), typeof(MovementController))]
     abstract public class Entity : MonoBehaviour
     {
-        [SerializeField] private float speed = 5f;
-        [SerializeField] private float jumpVelocity = 10f;
-        [SerializeField] private float jumpHoldingFalloff = 1f;
-
-        private IMovementDirectionSource movementDirectionSource;
+        protected IMovementDirectionSource movementDirectionSource;
+        protected IAttackInputSource attackSource;
+        private SpriteRenderer spriteRenderer;
+        protected MovementController movementController;
         private HealthComponent healthComponent;
-        private Rigidbody2D rb;
-
-        private float direction;
-        private bool jumped;
+        protected Animator animator;
         
         void Awake()
         {
             movementDirectionSource = GetComponent<IMovementDirectionSource>();
+            attackSource = GetComponent<IAttackInputSource>();
+            movementController = GetComponent<MovementController>();
+            spriteRenderer= GetComponent<SpriteRenderer>();
             healthComponent = GetComponent<HealthComponent>();
-            rb = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
         }
 
-        void Update()
+        public void Update()
         {
-            direction = movementDirectionSource.direction;
-            jumped = movementDirectionSource.jumped;
+            movementLogic();
+        }
 
-            rb.velocity = new Vector2(direction * speed, 0);
-            if (jumped)
-                rb.AddForce(new Vector2(0, jumpVelocity));
+        protected void movementLogic()
+        {
+            movementController.direction = movementDirectionSource.direction;
+            if (movementController.direction > 0) spriteRenderer.flipX = false;
+            else if (movementController.direction < 0) spriteRenderer.flipX = true;
+            if (movementDirectionSource.jumped)
+                movementController.Jump();
         }
     }
 }
