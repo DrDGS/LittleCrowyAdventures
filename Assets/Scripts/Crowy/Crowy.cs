@@ -6,18 +6,10 @@ namespace Assets.Scripts.Crowy
     [RequireComponent(typeof(CrowyMovementDirectionSource), typeof(CrowyAttackInput), typeof(Animator))]
     public class Crowy : Entity
     {
-        private int comboX = 0;
-
-        public void FixedUpdate()
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            AnimationLogic();
-        }
-
-        private void AnimationLogic()
-        {
-            animator.SetInteger("ComboX", comboX);
-            animator.SetTrigger("Draw");
-            animator.SetBool("Moving", movementDirectionSource.direction != 0);
+            if (LayerUtils.isEnemyHitbox(collision.gameObject))
+                takeDamage(collision.gameObject.GetComponent<AttackHitboxData>());
         }
     }
 }

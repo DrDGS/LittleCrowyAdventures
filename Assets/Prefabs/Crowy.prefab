@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3457805136411097806}
   - component: {fileID: 4806884034286278188}
+  - component: {fileID: 8803247672216693436}
   m_Layer: 7
   m_Name: AttackX
   m_TagString: Untagged
@@ -61,7 +62,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -85,6 +86,20 @@ PolygonCollider2D:
       - {x: 1.8628542, y: 0.67986274}
       - {x: 1.8806354, y: 0.8220635}
   m_UseDelaunayMesh: 0
+--- !u!114 &8803247672216693436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5819243827937408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab533564348a148ac1812e2ba4ce43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <damage>k__BackingField: 2
+  <hitForce>k__BackingField: {x: 2, y: 0}
 --- !u!1 &2575843901675298741
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4027545070669991587}
   - component: {fileID: 4057820598711622576}
+  - component: {fileID: 6665889002491235693}
   m_Layer: 7
   m_Name: AttackXX
   m_TagString: Untagged
@@ -180,7 +196,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -203,6 +219,20 @@ PolygonCollider2D:
       - {x: 0.69521594, y: 0.23726368}
       - {x: 1.8198428, y: 0.626638}
   m_UseDelaunayMesh: 0
+--- !u!114 &6665889002491235693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745587575926800442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab533564348a148ac1812e2ba4ce43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <damage>k__BackingField: 3
+  <hitForce>k__BackingField: {x: 3, y: 0}
 --- !u!1 &8855445700515120807
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,6 +501,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d0c6f231-c9d1-4287-b79b-77c64f7c057d
     m_ActionName: Player/AttackY[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3164301756728780096}
+        m_TargetAssemblyTypeName: Assets.Scripts.Crowy.CrowyAttackInput, Assembly-CSharp
+        m_MethodName: Special
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bb4a018e-72bd-4d27-abd6-9651c31956ba
+    m_ActionName: Player/Draw[/XInputControllerWindows/rightTrigger,/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -525,10 +571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14bb37e9e7ea024ea7175a224bd64b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
-  jumpVelocity: 1
-  jumpHoldingFalloff: 1
-  gravityMultiplier: 1
+  speed: 2
+  jumpVelocity: 4
+  jumpHoldingFalloff: 3
 --- !u!114 &3164301756728780096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3171041552875192695}
   - component: {fileID: 3977849976355828332}
+  - component: {fileID: 1030734033967126705}
   m_Layer: 7
   m_Name: DrawAttack
   m_TagString: Untagged
@@ -629,3 +675,17 @@ PolygonCollider2D:
       - {x: 0.47860777, y: -1.13655}
       - {x: 1.3592861, y: -0.22737753}
   m_UseDelaunayMesh: 0
+--- !u!114 &1030734033967126705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192746326001483629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab533564348a148ac1812e2ba4ce43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <damage>k__BackingField: 5
+  <hitForce>k__BackingField: {x: 0, y: 5}

@@ -11,19 +11,15 @@ namespace Assets.Scripts
     {
         protected IMovementDirectionSource movementDirectionSource;
         protected IAttackInputSource attackSource;
-        private SpriteRenderer spriteRenderer;
         protected MovementController movementController;
-        private HealthComponent healthComponent;
-        protected Animator animator;
+        protected HealthComponent healthComponent;
         
         void Awake()
         {
             movementDirectionSource = GetComponent<IMovementDirectionSource>();
             attackSource = GetComponent<IAttackInputSource>();
             movementController = GetComponent<MovementController>();
-            spriteRenderer= GetComponent<SpriteRenderer>();
             healthComponent = GetComponent<HealthComponent>();
-            animator = GetComponent<Animator>();
         }
 
         public void Update()
@@ -34,10 +30,17 @@ namespace Assets.Scripts
         protected void movementLogic()
         {
             movementController.direction = movementDirectionSource.direction;
-            if (movementController.direction > 0) spriteRenderer.flipX = false;
-            else if (movementController.direction < 0) spriteRenderer.flipX = true;
+            if (movementController.direction > 0 && movementController.canMove) transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            else if (movementController.direction < 0 && movementController.canMove) transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             if (movementDirectionSource.jumped)
-                movementController.Jump();
+                    movementController.Jump();
+        }
+
+        protected void takeDamage(AttackHitboxData attackData)
+        {
+            int isReversed = attackData.gameObject.transform.position.x < transform.position.x ? 1 : -1;
+            movementController.AddImpulseForce(new Vector2(attackData.hitForce.x * isReversed, attackData.hitForce.y));
+            healthComponent.takeDamage(attackData.damage);
         }
     }
 }

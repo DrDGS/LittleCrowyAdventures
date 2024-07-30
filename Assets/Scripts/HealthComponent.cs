@@ -9,9 +9,8 @@ namespace Assets.Scripts
         [SerializeField] private float maxHp = 5f;
         private float currentHp;
 
-        public HealthComponent(float maxHp)
+        public void Awake()
         {
-            this.maxHp = maxHp;
             currentHp = maxHp;
         }
 
@@ -21,11 +20,13 @@ namespace Assets.Scripts
 
             if (currentHp <= float.Epsilon)
                 Destroy(gameObject);
+
+            Debug.Log(currentHp);
         }
 
         public void getHeal(float heal)
         {
-            currentHp += Mathf.Max(0, heal);
+            currentHp += Mathf.Min(Mathf.Max(0, heal), maxHp);
         }
     }
 }
